@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Media Literacy</title>
+    <style>
+        /* Basic CSS styling */
+        :root {
+            --primary-color: #032e74;
+            --secondary-color: #1e40af;
+            --background-color: #002e5b;
+            --text-color: #1e293b;
+            --accent-color: #f97316;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #dbeafe;
+        }
+        
+        .hero {
+            padding: 50px 0;
+            height: 100vh; /* This makes it full screen height */
+    width: 100%;
+            text-align: center;
+            background-color: #dbeafe;
+            background-image: url('./technology-human-touch-background-modern-remake-creation-adam_53876-129794.avif');
+            background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .section {
+            padding: 50px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: var(--primary-color);
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question {
+            margin-bottom: 20px;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .option:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .selected {
+            background-color: #dbeafe;
+            border-color: var(--primary-color);
+        }
+        
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .resource-list li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+       
+        
+        .resource-list li:before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        footer {
+            background-color: #1e293b;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .cc-license {
+            margin-top: 10px;
+        }
+        /* Card expansion styles */
+.card {
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card-expanded-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    margin-top: 10px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0;
+}
+
+.card.expanded {
+    transform: none;
+}
+
+.card.expanded .card-expanded-content {
+    max-height: 1000px; /* Arbitrary large value */
+    padding-top: 15px;
+}
+
+/* Add a visual indicator that cards are clickable */
+.card::after {
+    content: "+";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.card.expanded::after {
+    content: "−";
+}
+
+.card {
+    position: relative; /* For positioning the + indicator */
+}
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">AI & Media Literacy</div>
+                <div class="nav-links">
+                    <a href="#learn">Learn</a>
+                    <a href="#strategies">Strategies</a>
+                    <a href="#quiz">Quiz</a>
+                    <a href="#resources">Resources</a>
+                    <a href="#about">About</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>AI & the Media: What You Need to Know</h1>
+            <p>Understand how AI affects media and information, and learn critical skills to stay informed in the digital age.</p>
+            <a href="#learn" class="btn">Start Learning</a>
+        </div>
+    </section>
+
+    <section id="learn" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 style = "color: #FFF;">How AI Affects Media</h2>
+                <p style = "color: #FFF;">Explore the various ways artificial intelligence is transforming our media landscape.</p>
+            </div>
+            <div class="card-container">
+                <div class="card" onclick="toggleCard(this)">
+                    <h3>AI-Generated Content</h3>
+                    <p>Learn about news articles, deepfakes, and synthetic voices created by artificial intelligence.</p>
+                    <div class="card-expanded-content">
+                        <p>AI can now generate realistic news articles that are difficult to distinguish from human-written content. This includes:</p>
+                        <ul>
+                            <li>News articles with perfect grammar but sometimes outdated information</li>
+                            <li>Deepfake videos that can make it appear as if people said things they never did</li>
+                            <li>Synthetic voices that sound nearly identical to real humans</li>
+                            <li>AI-generated images that can be used to spread misinformation</li>
+                        </ul>
+                        <p>These technologies pose significant challenges to information literacy as they make it harder to determine what's real.</p>
+                    </div>
+                </div>
+                    <div class="card" onclick="toggleCard(this)">
+                    <h3>Filter Bubbles</h3>
+                    <p>Understand how algorithmic curation shapes what content you see and how it affects your worldview.</p>
+                    <div class="card-expanded-content">
+                        <p>Filter bubbles happen when algorithms only show us content that matches what we already believe or enjoy. Platforms like YouTube, Instagram, and TikTok analyze our behavior — what we like, share, and watch — to recommend similar content. While this can be convenient, it also creates a personalized media environment that hides other viewpoints.</p>
+                        
+                        <p>Over time, this can lead to a narrow perspective of the world where we only see information that reinforces our existing beliefs. It becomes harder to understand or empathize with people who think differently. In extreme cases, this can lead to polarization, where people become divided into opposing groups who rarely interact with each other’s ideas.</p>
+                        
+                        <p>To avoid filter bubbles, we need to actively seek out different perspectives, engage with diverse voices, and question whether what we see online is the full picture.</p>
+                    </div>
+                    
+                </div>
+                <div class="card" onclick="toggleCard(this)">
+                    <h3>Misinformation Amplification</h3>
+                    <p>Discover how AI can be used in bot networks and fake news campaigns to spread misinformation.</p>
+                    <div class="card-expanded-content">
+                        <p>AI can be used to create and spread misinformation at a massive scale. Fake news, conspiracy theories, and harmful rumors are often pushed by bots — automated accounts designed to look like real users. These bots can share content thousands of times in minutes, making it seem more popular or trustworthy than it really is.</p>
+                    
+                        <p>Some AI tools can even generate convincing fake articles, videos (deepfakes), and images. These are sometimes used to influence elections, stir social unrest, or attack public figures. Because AI systems are optimized for engagement, not truth, misleading content often spreads faster than accurate information.</p>
+                    
+                        <p>This makes it more important than ever to question what we see online. Misinformation is not always obvious — it’s designed to manipulate emotions and grab attention. That’s why critical thinking and awareness are key tools in today’s media landscape.</p>
+                    </div>
+                    
+                </div>
+                    <div class="card" onclick="toggleCard(this)">
+                    <h3>Bias in Algorithms</h3>
+                    <p>Explore how AI systems can perpetuate and amplify biases that shape what we see and believe.</p>
+                    <div class="card-expanded-content">
+                        <p>AI systems are not truly objective. They are trained on massive datasets collected from the internet — and that data often includes human biases. When AI is used to curate your news feed, suggest videos, or rank search results, it can unintentionally reflect and even reinforce harmful stereotypes.</p>
+                    
+                        <p>For example, search results might prioritize certain races or genders when you search for job-related images. Or a recommendation algorithm might consistently ignore media created by marginalized communities. In this way, AI doesn't just mirror society — it can also shape our perception of it.</p>
+                    
+                        <p>That’s why it’s important to ask: who built the system? What data was it trained on? And who might be left out? Recognizing algorithmic bias helps us become more responsible digital citizens and more thoughtful media consumers.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="strategies" class="section" style="background-color: #f1f5f9;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Strategies for Navigating AI Media</h2>
+                <p>Essential tools and techniques to help you critically evaluate information in the age of AI.</p>
+            </div>
+            <div class="card-container">
+                <div class="card" onclick="toggleCard(this)">
+                    <h3>Media Literacy</h3>
+                    <p>Learn critical thinking skills to evaluate sources and claims effectively.</p>
+                    <div class="card-expanded-content">
+                        <p>Media literacy means more than just reading headlines — it’s about understanding how media works and developing the ability to think critically about what you see. In a world where AI tailors content to our habits, media literacy becomes a superpower.</p>
+                    
+                        <p>Being media literate means you can identify the purpose behind a piece of content — is it meant to inform, entertain, sell, or manipulate? You learn to spot emotional appeals, clickbait, and sensational headlines. You also become more aware of your own biases and how they affect what you believe.</p>
+                    
+                        <p>With strong media literacy, you are less likely to fall for fake news or be misled by biased content. You become a conscious consumer — someone who thinks before they click, questions before they share, and values truth over engagement.</p>
+                    </div>
+                    
+                </div>
+                <div class="card" onclick="toggleCard(this)">
+                    <h3>Fact-Checking Tools</h3>
+                    <p>Discover useful resources like Snopes, Google Fact Check, and AI-detection tools.</p>
+                    <div class="card-expanded-content">
+                        <p>In the digital age, it’s easy for false information to spread like wildfire — but luckily, there are powerful tools you can use to fight back. Fact-checking websites and browser extensions help verify whether a story, claim, or image is real.</p>
+                    
+                        <p>For example:</p>
+                        <ul>
+                            <li><strong>Snopes</strong> investigates viral stories, urban legends, and hoaxes.</li>
+                            <li><strong>Google Fact Check Explorer</strong> lets you search for fact-checked claims from multiple sources.</li>
+                            <li><strong>InVID</strong> is a browser plugin that helps you verify videos and images, especially useful for spotting deepfakes and misleading visuals.</li>
+                        </ul>
+                    
+                        <p>Using these tools regularly trains your brain to verify before you trust. Even if a post is shared by someone you know, that doesn’t guarantee it’s true — and AI makes it easier than ever to create convincing lies. That’s why digital skepticism is an essential skill.</p>
+                    </div>
+                    
+                </div>
+                <div class="card" onclick="toggleCard(this)">
+                    <h3>Understanding Algorithms</h3>
+                    <p>Learn how recommendation systems work and how they influence what content you see.</p>
+                    <div class="card-expanded-content">
+                        <p>Behind every social media feed, trending video, or search result is an algorithm — a set of rules that decides what you see, when you see it, and how often. These algorithms are designed to keep you engaged, often by showing you content that aligns with your past behavior and preferences.</p>
+                    
+                        <p>But here’s the catch: algorithms aren’t neutral. They can trap you in a bubble where you only see certain types of content, reinforcing your beliefs and filtering out opposing views. This can distort your understanding of reality and limit your ability to think critically.</p>
+                    
+                        <p>Understanding how algorithms work gives you the power to resist passive consumption. You begin to notice patterns: Why am I seeing this post? Why did this video go viral? What am I not seeing? With awareness, you can take steps to diversify your feed, clear your history, or actively search for different content — breaking the cycle of algorithmic control.</p>
+                    
+                        <p>In the age of AI, being algorithm-literate is like having a superpower. It helps you take back control of your attention, your beliefs, and your digital identity.</p>
+                    </div>
+                    
+                </div>
+                <div class="card" onclick="toggleCard(this)">
+                    <h3>Cross-Verifying Sources</h3>
+                    <p>Techniques for comparing different viewpoints and identifying reliable information.</p>
+                    <div class="card-expanded-content">
+                        <p>One of the best ways to avoid falling into filter bubbles or echo chambers is to actively seek out information from multiple sources. No single platform or news outlet can give you the full story — especially when AI is curating your feed based on your previous behavior.</p>
+                        
+                        <p>Diversifying sources means following different perspectives: international news outlets, independent journalists, fact-checking websites, and even creators you don’t always agree with. This doesn’t mean believing everything you see — it means comparing, questioning, and noticing how different voices frame the same event.</p>
+                        
+                        <p>When you consume media from a variety of sources, you become a more informed and balanced thinker. You begin to recognize media bias, spot contradictions, and develop your own well-reasoned opinions. In a world shaped by algorithms, diversity in your feed is a conscious choice — and a powerful one.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: #FFF;">Test Your Knowledge</h2>
+                <p style = "color: #FFF;">Take this quick quiz to see how well you understand AI's impact on media.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="question" id="question1">
+                    <h3>1. Which of these is most likely to be AI-generated content?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('question1', this)">A news article with perfect grammar but outdated information</div>
+                        <div class="option" onclick="selectOption('question1', this)">A social media post with spelling errors and personal anecdotes</div>
+                        <div class="option" onclick="selectOption('question1', this)">A video with consistent lighting and professional narration</div>
+                        <div class="option" onclick="selectOption('question1', this)">An opinion piece with strong emotional language</div>
+                    </div>
+                </div>
+                <div class="question" id="question2">
+                    <h3>2. What is a "filter bubble"?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('question2', this)">A tool that blocks inappropriate content</div>
+                        <div class="option" onclick="selectOption('question2', this)">An algorithm that shows you similar content to what you've engaged with before</div>
+                        <div class="option" onclick="selectOption('question2', this)">A website that fact-checks news articles</div>
+                        <div class="option" onclick="selectOption('question2', this)">Software that detects AI-generated images</div>
+                    </div>
+                </div>
+                <div class="question" id="question3">
+                    <h3>3. Which strategy is most effective for verifying information?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('question3', this)">Checking if the information has many likes or shares</div>
+                        <div class="option" onclick="selectOption('question3', this)">Consulting multiple credible sources on the same topic</div>
+                        <div class="option" onclick="selectOption('question3', this)">Asking friends what they think about it</div>
+                        <div class="option" onclick="selectOption('question3', this)">Seeing if the information confirms what you already believe</div>
+                    </div>
+                </div>
+                <button class="btn" style="margin-top: 20px;" onclick="checkAnswers()">Submit Answers</button>
+                <div id="quiz-results" style="margin-top: 20px; display: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources" class="section" style="background-color: #f1f5f9;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Resources</h2>
+                <p>Helpful links and tools to further develop your media literacy skills.</p>
+            </div>
+            <div class="card">
+                <h3>Recommended Tools</h3>
+                <ul class="resource-list">
+                    <li><a href="https://www.snopes.com/" target="_blank">Snopes</a> - Fact-checking website</li>
+                    <li><a href="https://toolbox.google.com/factcheck/explorer" target="_blank">Google Fact Check Tools</a> - Search for fact-checked articles</li>
+                    <li><a href="https://www.poynter.org/mediawise/" target="_blank">MediaWise</a> - Digital literacy program</li>
+                    <li><a href="https://www.commonsensemedia.org/" target="_blank">Common Sense Media</a> - Media literacy for families</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>About This Resource</h2>
+                <p>Information about this Open Educational Resource.</p>
+            </div>
+            <div class="card">
+                <h3>Purpose</h3>
+                <p>This website was created as an Open Educational Resource (OER) to help users understand how AI affects media and information, and how to stay critical and informed in the digital age.</p>
+                
+                <h3>License</h3>
+                <div class="cc-license">
+                    <p>© 2025 Salhi Fatma. All content on this website is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).</a>.</p>
+                    <p>You are free to share and adapt this material with appropriate attribution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 AI & Media Literacy OER Project</p>
+            <p>Created as an Open Educational Resource</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple quiz functionality
+        function selectOption(questionId, option) {
+            // Remove selected class from all options in this question
+            const question = document.getElementById(questionId);
+            const options = question.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            option.classList.add('selected');
+        }
+        
+        function checkAnswers() {
+            // Correct answers (indices starting from 0)
+            const correctAnswers = {
+                'question1': 0, // A news article with perfect grammar but outdated information
+                'question2': 1, // An algorithm that shows you similar content to what you've engaged with before
+                'question3': 1  // Consulting multiple credible sources on the same topic
+            };
+            
+            let score = 0;
+            let feedback = '';
+            
+            // Check each question
+            for (const questionId in correctAnswers) {
+                const question = document.getElementById(questionId);
+                const options = question.querySelectorAll('.option');
+                const selectedIndex = Array.from(options).findIndex(opt => opt.classList.contains('selected'));
+                
+                if (selectedIndex === -1) {
+                    feedback += `<p>Question ${questionId.replace('question', '')}: Not answered</p>`;
+                } else if (selectedIndex === correctAnswers[questionId]) {
+                    score++;
+                    feedback += `<p>Question ${questionId.replace('question', '')}: Correct! ✓</p>`;
+                } else {
+                    feedback += `<p>Question ${questionId.replace('question', '')}: Incorrect ✗</p>`;
+                }
+            }
+            
+            // Show results
+            const resultsDiv = document.getElementById('quiz-results');
+            resultsDiv.innerHTML = `
+                <h3>Your Score: ${score} out of 3</h3>
+                ${feedback}
+                <p>${score === 3 ? 'Excellent work! You have a good understanding of AI and media literacy.' : 
+                   score >= 1 ? 'Good effort! Review the sections above to improve your understanding.' : 
+                   'Keep learning! Review the material and try again.'}</p>
+            `;
+            resultsDiv.style.display = 'block';
+            
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        // Function to toggle card expansion
+function toggleCard(card) {
+    // Close all other cards first
+    document.querySelectorAll('.card').forEach(otherCard => {
+        if (otherCard !== card) {
+            otherCard.classList.remove('expanded');
+        }
+    });
+    
+    // Toggle clicked card
+    card.classList.toggle('expanded');
+    
+    // Scroll if expanded
+    if (card.classList.contains('expanded')) {
+        setTimeout(() => {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+    }
+    
+    // Prevent event bubbling
+    event.stopPropagation();
+}
+    </script>
+</body>
+</html>
